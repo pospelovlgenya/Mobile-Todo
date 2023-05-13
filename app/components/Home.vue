@@ -4,7 +4,7 @@
             <Label text="Todo"/>
         </ActionBar>
         
-        <GridLayout rows="auto, *" columns="*">
+        <GridLayout rows="auto, *, auto" columns="*">
           
           <GridLayout row="0" rows="auto" columns="*, *, *, *">
             <Switch col="0" checked="false" v-model="first"/>
@@ -17,12 +17,12 @@
             <FlexboxLayout flexDirection="column">
               <FlexboxLayout v-for="task in show" :key="task.id" flexDirection="column">
                 <FlexboxLayout flexDirection="center">
-                  <GridLayout rows="*, 2*" columns="*">
-                    <label row="0" :text="task.name"/>
-                    <label row="1" :text="task.description"/>
+                  <GridLayout rows="*, 2*" columns="*" @tap="GoToTask(task.id)">
+                    <label row="0" :text="task.name" @tap="GoToTask(task.id)"/>
+                    <label row="1" :text="task.description" @tap="GoToTask(task.id)"/>
                   </GridLayout>
-                  <Image src="~/assets/Done.png" height="70" width="33%" stretch="aspectFit" v-if="task.complete"/>
-                  <Image src="~/assets/NotDone.png" height="70" width="33%" stretch="aspectFit" v-else/>
+                  <Image src="~/assets/Done.png" height="70" width="33%" stretch="aspectFit" @tap="changeComplete(task.id)" v-if="task.complete"/>
+                  <Image src="~/assets/NotDone.png" height="70" width="33%" stretch="aspectFit" @tap="changeComplete(task.id)" v-else/>
                 </FlexboxLayout>
               </FlexboxLayout>
             </FlexboxLayout>
@@ -30,21 +30,24 @@
 
           <label row="1" text="Задач не обнаружено" v-else/>
             
+          <FlexboxLayout row="2" flexDirection="column" @tap="newTask()">
+            <Image src="~/assets/Add.png" height="50" width="33%" stretch="aspectFit" />
+          </FlexboxLayout>
       </GridLayout>
         
     </Page>
 </template>
 
 <script>
-
 import * as ApplicationSettings from '@nativescript/core/application-settings';
+import Task from './Task.vue';
 export default {
     data() {
         return {
             first: false,
             second: false,
             tasks: [
-              { id: 0, name: "1", description: "d1", complete: true },
+                { id: 0, name: "1", description: "d1", complete: true },
                 { id: 1, name: "2", description: "d2", complete: true },
                 { id: 2, name: "3", description: "d3", complete: false },
                 { id: 3, name: "4", description: "d4", complete: false },
@@ -92,14 +95,31 @@ export default {
         }
         this.show = this.tasks;
       },
+      sortId() {
+        for (var i = 0; i < this.tasks.length; i++) {
+          this.tasks[i].id = Number(i);
+        }
+      },
       save() {
         ApplicationSettings.setString("tasks", JSON.stringify(Object.assign({}, this.tasks)));
+      },
+      changeComplete(id) {
+        this.tasks[id].complete = !(this.tasks[id].complete);
+      },
+      GoToTask: function(id) {
+        this.$navigateTo(Task, { props: {id: id, name: this.tasks[id].name, description: this.tasks[id].description}});
+      },
+      newTask() {
+        this.sortId();
+        var nextId = this.tasks.length;
+        this.tasks.push({id: Number(nextId), name: 'New Task', description: 'New Task', complete: false});
+        this.save();
+        this.GoToTask(nextId);
       },
     },
 };
 </script>
 
 <style scoped lang="scss">
-    @import '@nativescript/theme/scss/variables/blue';
 
 </style>

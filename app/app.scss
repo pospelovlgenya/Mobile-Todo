@@ -8,3 +8,44 @@
     color: #FFFFFF;
     text-align: center;
   }
+
+.ab {
+  background-color: #FFFF00;
+}
+
+.fl {
+  padding: 10px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
+}
+
+.header {
+  font-size: 30pt;
+  place-items: center;
+  place-content: center;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+  color:  #000000;
+}
+
+.home-button {
+  font-size: 20pt;
+  margin: 30px 0px 30px 0px;
+  padding: auto;
+  border: #FFFFFF;
+  border-radius: 100px;
+  box-shadow: 0 0 25px #FFFFFF;
+  color: #FFFF00;
+  background-color: #000000;
+}
+.home-button:active{
+  color: #FFFFFF;
+}
+
+.text {
+  font-size: 15pt;
+  padding: 30px 0px 30px 0px;
+  text-align: center;
+  place-items: center;
+  place-content: center;
+  color: #FFFFFF;
+}
