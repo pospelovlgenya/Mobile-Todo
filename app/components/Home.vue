@@ -17,7 +17,7 @@
             <FlexboxLayout flexDirection="column">
               <FlexboxLayout v-for="task in show" :key="task.id" flexDirection="column">
                 <FlexboxLayout flexDirection="center">
-                  <GridLayout rows="*, 2*" columns="*" @tap="GoToTask(task.id)">
+                  <GridLayout rows="*, *" columns="*" @tap="GoToTask(task.id)">
                     <label row="0" :text="task.name" @tap="GoToTask(task.id)"/>
                     <label row="1" :text="task.description" @tap="GoToTask(task.id)"/>
                   </GridLayout>
@@ -42,34 +42,29 @@
 import * as ApplicationSettings from '@nativescript/core/application-settings';
 import Task from './Task.vue';
 export default {
+    props: ['met', 'taskdata'],
     data() {
         return {
             first: false,
             second: false,
-            tasks: [
-                { id: 0, name: "1", description: "d1", complete: true },
-                { id: 1, name: "2", description: "d2", complete: true },
-                { id: 2, name: "3", description: "d3", complete: false },
-                { id: 3, name: "4", description: "d4", complete: false },
-                { id: 4, name: "5", description: "d5", complete: false },
-                { id: 5, name: "6", description: "d6", complete: true },
-                { id: 6, name: "7", description: "d7", complete: true },
-                { id: 7, name: "8", description: "d8", complete: false },
-                { id: 8, name: "9", description: "d9", complete: false },
-                { id: 9, name: "10", description: "d10", complete: true },
-                { id: 10, name: "11", description: "d11", complete: true },
-                { id: 11, name: "12", description: "d12", complete: true },
-                { id: 12, name: "13", description: "d13", complete: false },
-                { id: 13, name: "14", description: "d14", complete: false },
-              ],
-              show: [],
+            tasks: [],
+            show: [],
             };
     },
     beforeMount() {
       if (ApplicationSettings.getString("tasks")) {
         this.tasks = Object.values(JSON.parse(ApplicationSettings.getString("tasks")));
       }
+      if (this.met == 'del') {
+        this.tasks.splice(this.taskdata, 1);
+      }
+      if (this.met == 'che') {
+        this.tasks[this.taskdata[0]].name = this.taskdata[1];
+        this.tasks[this.taskdata[0]].description = this.taskdata[2];
+      }
+      this.sortId();
       this.GetShow();
+      this.save();
     },
     watch: {
       first: function() {
@@ -81,15 +76,11 @@ export default {
     },
     methods: {
       GetShow() {
-        if (this.first && this.second) {
-          this.show = this.tasks;
-          return
-        }
-        if (this.first) {
+        if (this.first && !this.second) {
           this.show = this.tasks.filter(item => item.complete == false);
           return
         }
-        if (this.second) {
+        if (this.second && !this.first) {
           this.show = this.tasks.filter(item => item.complete == true);
           return
         }
@@ -105,12 +96,12 @@ export default {
       },
       changeComplete(id) {
         this.tasks[id].complete = !(this.tasks[id].complete);
+        this.save();
       },
       GoToTask: function(id) {
         this.$navigateTo(Task, { props: {id: id, name: this.tasks[id].name, description: this.tasks[id].description}});
       },
       newTask() {
-        this.sortId();
         var nextId = this.tasks.length;
         this.tasks.push({id: Number(nextId), name: 'New Task', description: 'New Task', complete: false});
         this.save();
