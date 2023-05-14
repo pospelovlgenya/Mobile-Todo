@@ -4,18 +4,14 @@
 .page {
     place-items: center;
     place-content: center;
-    background-color: #000000;
-    color: #FFFFFF;
+    background-color: #000;
+    color: #FFF;
     text-align: center;
+    font-size: 20pt;
   }
 
 .ab {
-  background-color: #FFFF00;
-}
-
-.fl {
-  padding: 10px 0px 10px 0px;
-  margin: 10px 0px 10px 0px;
+  background-color: #FF0;
 }
 
 .header {
@@ -24,28 +20,56 @@
   place-content: center;
   padding: 10px 10px 10px 10px;
   margin: 10px 10px 10px 10px;
-  color:  #000000;
+  color:  #000;
 }
 
-.home-button {
+.button {
   font-size: 20pt;
-  margin: 30px 0px 30px 0px;
-  padding: auto;
-  border: #FFFFFF;
-  border-radius: 100px;
-  box-shadow: 0 0 25px #FFFFFF;
-  color: #FFFF00;
-  background-color: #000000;
-}
-.home-button:active{
-  color: #FFFFFF;
+  text-align: left;
+  margin: 1px, 20px, 1px, 5px;
+  background-color: #000;
+  color: #FF0;
+  border: #FFF;
+  border-radius: 25px;
+  box-shadow: 0 0 10px #FFF;
 }
 
-.text {
+.fulltask {
   font-size: 15pt;
-  padding: 30px 0px 30px 0px;
-  text-align: center;
-  place-items: center;
-  place-content: center;
-  color: #FFFFFF;
+  margin: 20px 20px 20px 20px;
+  padding: 5px 20px 5px 20px;
+  border: #FFF;
+  border-radius: 50px;
+  box-shadow: 0 0 25px #FFF;
+  color: #FFF;
+  background-color: #000;
+}
+
+.taskname {
+  margin: 0 0 1px 0;
+  padding: 2px 10px 2px 2px;
+  box-shadow: 0 1 1px #FFF;
+  border: #000;
+  border-radius: 25px;
+  color: #FF0;
+  background-color: #000; 
+}
+
+.taskdesc {
+  margin: 1px 0 0 0;
+  padding: 2px 10px 2px 2px;
+  box-shadow: 0 -1 1px #FFF;
+  border: #000;
+  border-radius: 25px;
+  color: #0FF;
+  background-color: #000; 
+}
+
+.taskimg {
+  margin: 0 1px 0 0;
+  padding: 2px 2px 2px 25px;
+  box-shadow: -1 0 1px #FFF;
+  border: #000;
+  border-radius: 25px;
+  background-color: #000; 
 }

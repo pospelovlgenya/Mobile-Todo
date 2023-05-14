@@ -1,41 +1,45 @@
 <template>
-    <Page class="page">
-        <ActionBar>
-            <Label text="Todo"/>
-        </ActionBar>
+  <Page class="page">
+      <ActionBar class="ab">
+        <Label text="Todo" class="header"/>
+      </ActionBar>
+      
+      <GridLayout rows="auto, *, auto" columns="*">
         
-        <GridLayout rows="auto, *, auto" columns="*">
-          
-          <GridLayout row="0" rows="auto" columns="*, *, *, *">
+        <GridLayout row="0" rows="auto" columns="*, *">
+          <GridLayout col="0" rows="auto" columns="auto, *" class="button">
             <Switch col="0" checked="false" v-model="first"/>
             <Label col="1" text="In progress" textWrap="true"/>
-            <Switch col="2" checked="false" v-model="second"/>
-            <Label col="3" text="Complited" textWrap="true"/>
           </GridLayout>
-          
-          <ScrollView row="1" v-if="show.length">
-            <FlexboxLayout flexDirection="column">
-              <FlexboxLayout v-for="task in show" :key="task.id" flexDirection="column">
-                <FlexboxLayout flexDirection="center">
-                  <GridLayout rows="*, *" columns="*" @tap="GoToTask(task.id)">
-                    <label row="0" :text="task.name" @tap="GoToTask(task.id)"/>
-                    <label row="1" :text="task.description" @tap="GoToTask(task.id)"/>
-                  </GridLayout>
-                  <Image src="~/assets/Done.png" height="70" width="33%" stretch="aspectFit" @tap="changeComplete(task.id)" v-if="task.complete"/>
-                  <Image src="~/assets/NotDone.png" height="70" width="33%" stretch="aspectFit" @tap="changeComplete(task.id)" v-else/>
-                </FlexboxLayout>
+          <GridLayout col="1" rows="auto" columns="auto, *" class="button">
+            <Switch col="0" checked="false" v-model="second"/>
+            <Label col="1" text="Complited" textWrap="true"/>
+          </GridLayout>
+        </GridLayout>
+        
+        <ScrollView row="1" v-if="show.length">
+          <FlexboxLayout flexDirection="column">
+            <FlexboxLayout v-for="task in show" :key="task.id" flexDirection="column" class="fulltask">
+              <FlexboxLayout flexDirection="center">
+                <GridLayout rows="*, *" columns="*" @tap="GoToTask(task.id)">
+                  <label row="0" :text="task.name" class="taskname"/>
+                  <label row="1" :text="task.description" class="taskdesc"/>
+                </GridLayout>
+                <Image src="~/assets/Done.png" height="70" width="33%" stretch="aspectFit" @tap="changeComplete(task.id)" v-if="task.complete" class="taskimg"/>
+                <Image src="~/assets/NotDone.png" height="70" width="33%" stretch="aspectFit" @tap="changeComplete(task.id)" v-else class="taskimg"/>
               </FlexboxLayout>
             </FlexboxLayout>
-          </ScrollView>
-
-          <label row="1" text="Задач не обнаружено" v-else/>
-            
-          <FlexboxLayout row="2" flexDirection="column" @tap="newTask()">
-            <Image src="~/assets/Add.png" height="50" width="33%" stretch="aspectFit" />
           </FlexboxLayout>
-      </GridLayout>
-        
-    </Page>
+        </ScrollView>
+
+        <label row="1" text="Задач не обнаружено" v-else/>
+          
+        <FlexboxLayout row="2" flexDirection="column" @tap="newTask()" >
+          <Image src="~/assets/Add.png" height="50" width="33%" stretch="aspectFit" class="button" />
+        </FlexboxLayout>
+    </GridLayout>
+      
+</Page>
 </template>
 
 <script>
