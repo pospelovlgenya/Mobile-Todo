@@ -13,7 +13,7 @@
           </GridLayout>
           <GridLayout col="1" rows="auto" columns="auto, *" class="button">
             <Switch col="0" checked="false" v-model="second"/>
-            <Label col="1" text="Complited" textWrap="true"/>
+            <Label col="1" text="Completed" textWrap="true"/>
           </GridLayout>
         </GridLayout>
         
