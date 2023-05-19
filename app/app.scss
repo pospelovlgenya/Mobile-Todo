@@ -2,13 +2,13 @@
 @import '@nativescript/theme/default';
 
 .page {
-    place-items: center;
-    place-content: center;
-    background-color: #000;
-    color: #FFF;
-    text-align: center;
-    font-size: 20pt;
-  }
+  place-items: center;
+  place-content: center;
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+  font-size: 20pt;
+}
 
 .ab {
   background-color: #FF0;
@@ -20,7 +20,7 @@
   place-content: center;
   padding: 10px 10px 10px 10px;
   margin: 10px 10px 10px 10px;
-  color:  #000;
+  color: #000;
 }
 
 .button {
@@ -52,7 +52,7 @@
   border: #000;
   border-radius: 25px;
   color: #FF0;
-  background-color: #000; 
+  background-color: #000;
 }
 
 .taskdesc {
@@ -62,7 +62,7 @@
   border: #000;
   border-radius: 25px;
   color: #0FF;
-  background-color: #000; 
+  background-color: #000;
 }
 
 .taskimg {
@@ -71,7 +71,7 @@
   box-shadow: -1 0 1px #FFF;
   border: #000;
   border-radius: 25px;
-  background-color: #000; 
+  background-color: #000;
 }
 
 .namechange {
